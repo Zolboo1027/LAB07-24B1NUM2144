@@ -3,13 +3,34 @@
 /* p-ийн зааж буй Queue-д x утгыг хийнэ */
 void q_push(Queue *p, int x)
 {
-        /* Энд оруулах үйлдлийг хийнэ үү */
+        Elm *e = (Elm *)malloc(sizeof(Elm));
+        if(e==NULL){return;}
+
+        e->x = x;
+        e->next = NULL;
+
+        if (p->tail == NULL) {       
+                p->head = e;
+                p->tail = e;
+        } else {                  
+                p->tail->next = e;  
+                p->tail = e;        
+        }
+        p->len++;
 }
 
 /* p-ийн зааж буй Queue-с гаргана */
 void q_pop(Queue *p)
 {
-        /* Энд гаргах үйлдлийг хийнэ үү */
+        if (p->head == NULL)       
+                return;
+
+        Elm *temp = p->head;         
+        p->head = temp->next;        
+        if (p->head == NULL)          
+                p->tail = NULL;       
+        free(temp);
+        p->len--;
 }
 
 /*
@@ -19,5 +40,9 @@ void q_pop(Queue *p)
  */
 void q_print(Queue *p)
 {
-        /* Энд хэвлэх үйлдлийг хийнэ үү */
+        Elm *cur = p->head;
+        while (cur != NULL) {
+                printf("%d\n", cur->x);
+                cur = cur->next;
+        }
 }
