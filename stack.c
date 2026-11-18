@@ -5,7 +5,7 @@
 void s_push(Stack *p, int x)
 {
         Elm *e = (Elm *)malloc(sizeof(Elm));
-        if (e=NULL){return;}
+        if (e==NULL){return;}
 
         e->x=x;
         e->next=p->top;
@@ -35,7 +35,7 @@ void s_print(Stack *p)
 {
         Elm *cur = p->top;
         while(cur!=NULL){
-                printf("%d",cur->x);
+                printf("%d\n",cur->x);
                 cur=cur->next;
         }
 }
